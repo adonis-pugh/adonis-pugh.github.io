@@ -1,0 +1,283 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css");
+
+:root {
+  --primary-color: rgb(44 62 80);
+  --secondary-color: rgb(52 152 219);
+  --secondary-color-translucent: rgb(52 152 219 / 0.4);
+  --accent-color: rgb(231 76 60);
+  --accent-color-translucent: rgb(231 76 60 / 0.4);
+  --navbar-height: 4rem;
+  --canvas-height: min(100vh, 1000px);
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 2000px;
+  scroll-margin-top: var(--navbar-height); /* not working, todo: investigate */
+  scroll-behavior: smooth;
+}
+
+/*  -------------------  */
+/* | custom scroll bar | */
+/*  -------------------  */
+body::-webkit-scrollbar {
+  width: 15px;
+  height: 15px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: hsl(0 0% 100% / 0.25);
+}
+
+body::-webkit-scrollbar-track {
+  background: rgb(0 0 0 / 0.75);
+}
+
+/*  -------------------  */
+/* |  Section Format  |  */
+/*  -------------------  */
+
+section:not(#home) {
+  padding: 2rem 8rem;
+}
+
+section h2 {
+  font-size: 60px;
+  font-weight: 800;
+  margin-bottom: 2rem;
+}
+
+section p {
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
+/*  -------------------- */
+/*  | Navigation Panel | */
+/*  -------------------- */
+.nav-wrapper {
+  font-size: 1.8rem;
+  font-weight: 700;
+  padding: 0 2rem;
+  display: flex;
+  height: var(--navbar-height);
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-wrapper ul {
+  list-style: none;
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+}
+
+.nav-wrapper ul li a {
+  color: inherit;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.nav-wrapper ul li a:hover {
+  color: var(--secondary-color);
+}
+
+/*  -------------------  */
+/* |    Home Screen    | */
+/*  -------------------  */
+#home {
+  height: var(--canvas-height);
+  background-color: black;
+}
+
+#home .canvas-wrapper {
+  width: 100%;
+  height: inherit;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+#home .canvas {
+  width: inherit;
+  height: inherit;
+}
+
+#home .canvas-wrapper > * {
+  grid-area: 1 / 1;
+}
+
+#home .canvas-wrapper > *:not(.canvas) {
+  text-shadow: 0 0 5px black;
+  z-index: 10;
+}
+
+#home .canvas-wrapper h1 {
+  font-size: 150px;
+  font-weight: 1000;
+  align-self: center;
+  justify-self: center;
+}
+
+/*  -------------------  */
+/*  |  About Screen   |  */
+/*  -------------------  */
+#about p {
+  text-align: left;
+  hyphens: none;
+  line-height: 2.5rem;
+}
+
+#about p img {
+  height: 350px;
+  width: 270px;
+  object-fit: cover;
+  float: right;
+  margin: 0 0 30px 50px;
+  box-shadow: 0 0 5px white;
+}
+
+/*  -------------------  */
+/*  | Projects Screen |  */
+/*  -------------------  */
+#projects .projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 400px;
+  gap: 50px;
+}
+
+#projects .projects-grid .stack {
+  display: grid;
+  width: 100%;
+}
+
+#projects .projects-grid .stack > * {
+  grid-area: 1 / 1;
+}
+
+#projects .projects-grid .project {
+  width: 100%;
+  height: 400px;
+  text-decoration: none;
+  transition: 0.5s ease 50ms;
+  box-shadow: 0 0 5px white;
+}
+
+#projects .projects-grid .project:hover {
+  transform: scale(1.1);
+}
+
+#projects .projects-grid:has(.project:hover) > *:not(.project:hover) {
+  transform: scale(0.9);
+  filter: blur(4px);
+}
+
+#projects .projects-grid .project .project-image {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+}
+
+#projects .projects-grid .project:nth-of-type(5) .project-image,
+#projects .projects-grid .project:nth-of-type(7) .project-image {
+  object-position: 0 0; /* position at top-left corner */
+}
+
+#projects .projects-grid .project .project-overlay {
+  background-color: rgb(0 0 0 / 0.75);
+  color: white;
+  font-size: 1.7rem;
+  font-weight: 700;
+  text-align: center;
+  align-self: end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 6rem;
+  backdrop-filter: blur(4px) brightness(80%);
+  transition: all 0.3s ease 200ms;
+  text-shadow: 0 0 2px black;
+}
+
+#projects
+  .projects-grid:has(.project:hover)
+  > *:not(.project:hover)
+  .project-overlay {
+  height: inherit;
+  filter: blur(4px);
+}
+
+#projects .projects-grid .project .project-overlay .code {
+  color: var(--accent-color);
+  margin: 0.5rem;
+}
+
+/*  -------------------  */
+/*  | Contacts Screen |  */
+/*  -------------------  */
+#contact p {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+#contact .contacts-wrapper {
+  margin-top: 2rem;
+  padding: 0 8rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+#contact .contacts-wrapper .contact-link {
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 700;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+#contact .contacts-wrapper .contact-link:hover {
+  transform: translate(0, -5px);
+  transition: transform 0.3s ease;
+  color: var(--secondary-color);
+}
+
+#contact .contacts-wrapper .contact-link i {
+  font-size: 3rem;
+}
+
+/*  -------------------  */
+/* |    Utilities      | */
+/*  -------------------  */
+.bg-1 {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.bg-2 {
+  background-color: var(--secondary-color-translucent);
+  color: white;
+}
+
+.bg-3 {
+  background-color: var(--accent-color-translucent);
+  color: white;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
